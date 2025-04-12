@@ -2,6 +2,8 @@
 
 Projeto .NET Core 8 de exemplo criado para interagir com Entity Framework e Migrations e demonstrar suas funcionalidades. Como base de dados é utilizado o SQLite representado pelo arquivo app.db na raiz do projeto. Este projeto contém também o Swagger para a documentação de seus endpoints.
 
+Como funcionalidade essa API apresenta a possibilidade de efetuar um CRUD de registros de lançamentos financeiros conténdo campos como descrição, valor, data lançamnento e o tipo de lançamento (RECEITA / DESPESA). Cada lançamento pode ter zero ou mais categorias (denomidada como tag no projeto). 
+
 # Comandos úteis criação do Projeto
 
 dotnet new web -o FinanceControl -f net8.0
