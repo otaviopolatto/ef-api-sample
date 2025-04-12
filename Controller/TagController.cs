@@ -51,7 +51,7 @@ namespace FinanceControl.Controller
         {
             var result = await _tagService.CreateTag(request);
 
-            return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
+            return result.Status != 201 ? NotFound() : StatusCode(201, result.Data);
 
         }
 

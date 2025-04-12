@@ -17,7 +17,7 @@ namespace FinanceControl.Service.TagService
             _context = context;
         }
 
-        public async Task<TagResponse> CreateTag(CreateTagRequest request)
+        public async Task<Response<TagResponse>> CreateTag(CreateTagRequest request)
         {
 
             // var tag = _mapper.Map<Tag>(request);
@@ -26,13 +26,19 @@ namespace FinanceControl.Service.TagService
 
             _context.Tags.Add(tag);
 
-            await _context.SaveChangesAsync();
+            var saveResponse = await _context.SaveChangesAsync();
 
-            await _context.Entry(tag).ReloadAsync();
+            if(saveResponse > 0)
+            {
+                await _context.Entry(tag).ReloadAsync();
 
-            var tagResponse = new TagResponse(tag.Id, tag.Descricao);
+                var tagResponse = new TagResponse(tag.Id, tag.Descricao);
 
-            return tagResponse;
+                return new Response<TagResponse> { Status = 201, Message = "Tag registrada com sucesso", Data = tagResponse, IsSuccess = true };
+          
+            }
+
+            return new Response<TagResponse> { Status = 400, Message = "Falha ao registrar tag", IsSuccess = false };
 
         }
 

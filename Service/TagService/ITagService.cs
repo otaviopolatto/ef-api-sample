@@ -6,7 +6,7 @@ namespace FinanceControl.Service.TagService
 {
     public interface ITagService
     {
-        Task<TagResponse> CreateTag(CreateTagRequest request);
+        Task<Response<TagResponse>> CreateTag(CreateTagRequest request);
 
         Task<Response<TagResponse>> GetTagById(int id);
 
